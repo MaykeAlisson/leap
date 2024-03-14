@@ -1,0 +1,7 @@
+cspringdoc:
+  api-docs:
+    path: /doc-api
+  swagger-ui:
+    path: /doc-ui
+  paths-to-match:
+    - /**
