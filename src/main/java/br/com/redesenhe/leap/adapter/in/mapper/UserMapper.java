@@ -8,6 +8,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 
+import java.util.Date;
+
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UserMapper {
 
@@ -17,7 +19,7 @@ public interface UserMapper {
     @Mapping(target = "password", source = "request.password")
     User toUser(CreateUserRequest request);
 
-    UserAcessResponse toUserAcessResponse(User user);
+    UserAcessResponse toUserAcessResponse(User user, String token, Date expiration);
 
 
 }
