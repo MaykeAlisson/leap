@@ -12,19 +12,37 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: true
-  datasource:
-    platform: postgres
-    driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/leap
-    username: root
-    password: admin
-  jpa:
-    open-in-view: false
-    hibernate.ddl-auto: validate
-    database: POSTGRESQL
-#    hibernate:
-#      ddl-auto: update
-    show-sql: true
+  management:
+    endpoints:
+      enabled-by-default: false
+      web:
+        base-path: /
+      exposure:
+        include: health
+      endpoint:
+        health:
+          enabled: true
+          group:
+            liveness:
+              include: livenessState, ping
+            readiness:
+              include: reasinessState
+            show-details: "NEVER"
+            probles:
+              enable: true
+      health:
+        ping:
+          enabled: true
+        diskspace:
+          enabled: true
+        livenessState:
+          enabled: true
+        readnessState:
+          enabled: true
+        servicosDependentes:
+          enabled: false
+        circuitbreakers:
+          enabled: false
 
 server:
   port: 8081

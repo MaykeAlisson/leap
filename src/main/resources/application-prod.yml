@@ -1,0 +1,17 @@
+# Pegar as credenciais do keyvalt
+spring:
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/leap
+    username: root
+    password: admin
+  jpa:
+    open-in-view: false
+    hibernate.ddl-auto: validate
+    database: POSTGRESQL
+    show-sql: false
+
+
+---
+
+brapiFindTicket: "https://brapi.dev/api/quote"
