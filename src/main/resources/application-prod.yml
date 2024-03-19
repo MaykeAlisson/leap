@@ -1,4 +1,4 @@
-# Pegar as credenciais do keyvalt
+# Pegar as credenciais do keyvault
 spring:
   datasource:
     platform: postgres
@@ -13,5 +13,8 @@ spring:
 
 
 ---
+
+jwt:
+  key: "pegar_do_key_vault"
 
 brapiFindTicket: "https://brapi.dev/api/quote"

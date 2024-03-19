@@ -1,5 +1,6 @@
 package br.com.redesenhe.leap.adapter.in.mapper;
 
+import br.com.redesenhe.leap.adapter.in.dto.AuthenticationRequest;
 import br.com.redesenhe.leap.adapter.in.dto.CreateUserRequest;
 import br.com.redesenhe.leap.adapter.in.dto.UserAcessResponse;
 import br.com.redesenhe.leap.adapter.out.repository.entity.UserEntity;
@@ -21,5 +22,10 @@ public interface UserMapper {
 
     UserAcessResponse toUserAcessResponse(User user, String token, Date expiration);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "name", ignore = true)
+    @Mapping(target = "email", source = "request.email")
+    @Mapping(target = "password", source = "request.password")
+    User toUser(AuthenticationRequest request);
 
 }

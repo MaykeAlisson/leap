@@ -8,6 +8,8 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.UnsupportedJwtException;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -24,12 +26,23 @@ import static java.time.LocalDateTime.now;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 @Service
+@NoArgsConstructor
+@AllArgsConstructor
 public class JwtProvider implements Serializable {
 
-    private JwtProvider() { }
+
+    @org.springframework.beans.factory.annotation.Value("${jwt.key}")
+    private String key;
+
+    private static String SECRET;
+
+    @org.springframework.beans.factory.annotation.Value("${jwt.key}")
+    public void setKeyStatic(String key){
+        JwtProvider.SECRET = key;
+    }
 
     public static final LocalDateTime JWT_TOKEN_VALIDITY = now().plusHours(3);
-    public static final String SECRET = "bGliZXJkYWRlX2ZpbmFuY2VpcmFfdHJhbnNwYXJlbmNpYV9nZXJhX2NvbmZpYW5jYQ==";
+
 
     public static Optional<String> gerar(
             final Integer idUsuario,

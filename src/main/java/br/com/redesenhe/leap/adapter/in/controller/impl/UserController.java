@@ -1,6 +1,7 @@
-package br.com.redesenhe.leap.adapter.in.controller;
+package br.com.redesenhe.leap.adapter.in.controller.impl;
 
 
+import br.com.redesenhe.leap.adapter.in.controller.UserControllerSwagger;
 import br.com.redesenhe.leap.adapter.in.dto.CreateUserRequest;
 import br.com.redesenhe.leap.adapter.in.dto.UserAcessResponse;
 import br.com.redesenhe.leap.adapter.in.mapper.UserMapper;
@@ -20,11 +21,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 import static br.com.redesenhe.leap.config.jwt.JwtProvider.JWT_TOKEN_VALIDITY;
 
 @RestController
 @RequestMapping(value = "/v1/users", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-public class UserController implements UserControllerSwagger{
+public class UserController implements UserControllerSwagger {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
@@ -42,7 +45,7 @@ public class UserController implements UserControllerSwagger{
         final String token = JwtProvider.gerar(execute.getId(), 1L)
                 .orElseThrow(() -> new RuntimeException("Nao foi possivel gerar token"));
         var expiration = Date.toDate(JWT_TOKEN_VALIDITY);
-        UserAcessResponse userAcessResponse = this.mapper.toUserAcessResponse(execute,token,expiration);
+        UserAcessResponse userAcessResponse = this.mapper.toUserAcessResponse(execute,token, expiration);
         return ResponseEntity.status(HttpStatus.CREATED).body(userAcessResponse);
     }
 
