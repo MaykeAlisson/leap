@@ -23,7 +23,7 @@ public class InsertUserAdapter implements InsertUserOutputPort {
     public User execute(User user) {
         this.userRepository.findByEmail(user.getEmail())
                 .ifPresent(entity -> {
-                    throw new BusinessExceptionHandler(format("Usuario com o  email %s já cadatrado", user.getEmail()));
+                    throw new BusinessExceptionHandler(format("Usuario com o email %s já cadatrado", user.getEmail()));
                 });
         user.setPassword(encriptar(user.getPassword()));
         var entity = this.mapper.toUserEntity(user);

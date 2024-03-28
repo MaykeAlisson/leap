@@ -99,7 +99,7 @@ public class AuthenticationFilterBeforeAfter extends OncePerRequestFilter {
         return new User("USER",
                 "",
                 List.of(new SimpleGrantedAuthority(RolePersonEnum.USER.getType())),
-                Long.valueOf(value.getIdUsuario()));
+                Integer.valueOf(value.getIdUsuario()));
     }
 
     private void setAttributeIdentifier(final HttpServletRequest request, final SecurityContext securityContext) {
